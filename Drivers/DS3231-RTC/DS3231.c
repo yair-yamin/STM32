@@ -391,6 +391,18 @@ HAL_StatusTypeDef DS3231_CLearAlarmsFlags(DS3231_Handle_t *handle)
 /** Functionality: Configure the square wave output or PWM mode **/
 HAL_StatusTypeDef DS3231_OutputPWM( DS3231_Handle_t *handle,uint8_t RS2,uint8_t RS1) 
 {
+    /******************************************************************************
+    * Square-Wave Output Frequency Options (when INTCN bit is 0):
+    * ----------------------------------------------------
+    * | RS2 | RS1 |   Output Frequency   |
+    * |-----|-----|----------------------|
+    * |  0  |  0  |         1 Hz         |
+    * |  0  |  1  |       1.024 kHz      |
+    * |  1  |  0  |       4.096 kHz      |
+    * |  1  |  1  |       8.192 kHz      |
+    * ----------------------------------------------------
+    ******************************************************************************/
+    
     HAL_StatusTypeDef status;
     uint8_t *DS3231_Reg = handle->Reg;
     // Validate the input values
